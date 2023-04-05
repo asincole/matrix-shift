@@ -1,4 +1,4 @@
-import {rotateMatrix} from './rotate-matrix.helper';
+import {rotateTable} from './rotate-matrix.helper';
 
 
 describe('circularShiftMatrix', () => {
@@ -59,7 +59,7 @@ describe('circularShiftMatrix', () => {
 				matrix: number[],
 				expected: { result: number[], is_valid: boolean }
 			}) => {
-				const result = rotateMatrix(matrix);
+				const result = rotateTable(matrix);
 				expect(result).toEqual(expected);
 			});
 	})
@@ -68,14 +68,14 @@ describe('circularShiftMatrix', () => {
 	describe('using individual tests', () => {
 		it('should return empty array is matrix is empty', () => {
 			const matrix = [];
-			const result = rotateMatrix(matrix);
+			const result = rotateTable(matrix);
 			const expected = {result: [], is_valid: false};
 			expect(result).toEqual(expected);
 		});
 
 		it('should return empty array is matrix is not square', () => {
 			const matrix = [1, 2, 3];
-			const result = rotateMatrix(matrix);
+			const result = rotateTable(matrix);
 			const expected = {result: [], is_valid: false};
 
 			expect(result).toEqual(expected);
@@ -85,7 +85,7 @@ describe('circularShiftMatrix', () => {
 			const matrix = [1];
 			const expected = {result: [1], is_valid: true};
 
-			const result = rotateMatrix(matrix);
+			const result = rotateTable(matrix);
 			expect(result).toEqual(expected);
 		});
 
@@ -101,7 +101,7 @@ describe('circularShiftMatrix', () => {
 				], is_valid: true
 			};
 
-			const result = rotateMatrix(matrix);
+			const result = rotateTable(matrix);
 			expect(result).toEqual(expected);
 		});
 
@@ -120,7 +120,7 @@ describe('circularShiftMatrix', () => {
 				], is_valid: true
 			};
 
-			const result = rotateMatrix(matrix);
+			const result = rotateTable(matrix);
 			expect(result).toEqual(expected);
 		});
 
@@ -141,7 +141,7 @@ describe('circularShiftMatrix', () => {
 				], is_valid: true
 			};
 
-			const result = rotateMatrix(matrix);
+			const result = rotateTable(matrix);
 			expect(result).toEqual(expected);
 		});
 
@@ -164,7 +164,7 @@ describe('circularShiftMatrix', () => {
 				], is_valid: true
 			};
 
-			const result = rotateMatrix(matrix);
+			const result = rotateTable(matrix);
 			expect(result).toEqual(expected);
 		});
 
@@ -189,7 +189,7 @@ describe('circularShiftMatrix', () => {
 				], is_valid: true
 			};
 
-			const result = rotateMatrix(matrix);
+			const result = rotateTable(matrix);
 			expect(result).toEqual(expected);
 		});
 	})
