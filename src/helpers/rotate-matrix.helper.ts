@@ -35,6 +35,7 @@ export function rotateMatrix(matrix: number[]): {
     result[center * N + center] = matrix[center * N + center];
   }
 
+  // a ring is the number of cells to the side of the current edge.
   for (let ring = 0; ring < rings; ring++) {
     /*
      * The size of the layer is the width of the current ring we are on, this reduces by 2
@@ -45,22 +46,46 @@ export function rotateMatrix(matrix: number[]): {
     /*
      * Top edge
      * We need to move each element of the top edge to the right by 1 position.
+     * ring * N gets the number of cells above the current ring
+     * ring + i gets the number of cells to the right of the first cell
+     *
+     * if I wanted to rotate the other way, I could use (ring + i) * N + (N - 1 - ring)
      */
     for (let i = 0; i < layerSize - 1; i++) {
       result[ring * N + (ring + i)] = matrix[ring * N + (ring + i + 1)];
     }
 
     // Left edge
+    /*
+     * (N - ring - i - 1) calculates the row number of the cell in the last row and first column of the current ring.
+     * the above * N calculates the number of cells above the current row
+     *
+     * if I wanted to rotate the other way, I could use (ring + i) * N + ring
+     */
     for (let i = 0; i < layerSize - 1; i++) {
       result[(N - ring - i - 1) * N + ring] = matrix[(N - ring - i - 2) * N + ring];
     }
 
     // Bottom edge
+    /*
+     * (N - 1 - ring) * N should calculate the number of cells before the last row in each ring
+     * (N - 1 - ring - i) gets the cells to the left or a cell in each ring
+     *
+     *
+     * if I wanted to rotate the other way, I could use (N - 1 - ring) * N + (ring + i)
+     */
     for (let i = 0; i < layerSize - 1; i++) {
-      result[(N - 1 - ring) * N +( N - 1 - ring - i)] = matrix[(N - 1 - ring) * N +(N - ring - i - 2)];
+      result[(N - 1 - ring) * N + (N - 1 - ring - i)] = matrix[(N - 1 - ring) * N + (N - ring - i - 2)];
     }
 
     // Right edge
+    /*
+     * (ring + i) * N gets the index of the first cell of the row of the current ring
+     * (N - 1 - ring) gets the column number of the cell at the right edge of the current ring
+     *
+     *
+     * if I wanted to rotate the other way, I could use (N - 1 - ring) * N + (N - 1 - ring - i)
+     */
     for (let i = 0; i < layerSize - 1; i++) {
       result[(ring + i) * N + (N - 1 - ring)] = matrix[(ring + i + 1) * N + (N - 1 - ring)];
     }
